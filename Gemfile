@@ -26,6 +26,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # gem 'rack-cors'
 
 gem 'activerecord-postgis-adapter', '~> 6.0.0'
+gem 'fast_jsonapi', '1.5'
 gem 'rgeo-activerecord', '~> 6.2.0'
 gem 'rgeo-geojson', '~> 2.1.0'
 gem 'sidekiq', '~> 6.0.0'
