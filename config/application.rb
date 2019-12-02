@@ -34,6 +34,6 @@ module RiskmethodsRecruitment
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    config.autoload_paths += %W( lib/ )
+    config.autoload_paths += %W( app/workers/ lib/ )
   end
 end
