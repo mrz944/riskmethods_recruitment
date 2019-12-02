@@ -1,27 +1,28 @@
 module GeoTools
   class Polygon
-    def initialize(points)
-      @points = points
+    def initialize(wkt_polygon)
+      @points = wkt_to_coords(wkt_polygon)[0]
 
       # ensure it's a closed polygon
-      @points << points[0] if points[0] != points[-1]
+      @points << @points[0] if @points[0] != @points[-1]
     end
 
-    def contains?(point)
+    def contains?(wkt_point)
+      point = wkt_to_coords(wkt_point)
+
       # horizontal ray method based on MacMartin algorithm from:
       # https://erich.realtimerendering.com/ptinpoly/
-      numverts = @points.length - 1
-
       tx = point[0]
       ty = point[1]
 
-      vtx0 = @points[numverts - 1]
+      vtx0 = @points[-1]
       yflag0 = (vtx0[1] >= ty)
 
       inside_flag = false
 
-      numverts.div(2).times do |index|
-        vtx1 = @points[index * 2]
+      @points.each do |p|
+        vtx1 = p
+
         yflag1 = (vtx1[1] >= ty)
         if yflag0 != yflag1
           xflag0 = (vtx0[0] >= tx)
@@ -37,6 +38,13 @@ module GeoTools
       end
 
       inside_flag
+    end
+
+    private
+
+    def wkt_to_coords(wkt)
+      factory = RGeo::Cartesian.preferred_factory
+      factory.parse_wkt(wkt).coordinates
     end
   end
 end
