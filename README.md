@@ -1,24 +1,29 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Getting started
 
-Things you may want to cover:
+1. Build docker container:
 
-* Ruby version
+        $ docker-compose build
 
-* System dependencies
+2. Run migrations:
 
-* Configuration
+        $ docker-compose run web rails db:create db:setup
 
-* Database creation
+3. Start up the server:
 
-* Database initialization
+        $ docker-compose up
 
-* How to run the test suite
+## Usage examples
 
-* Services (job queues, cache servers, search engines, etc.)
+1. Fetch the list of the given Areas in `GeoJSON` fromat:
 
-* Deployment instructions
+        $ curl -H "Accept: application/json" -H "Content-type: application/json" $(docker-machine ip):3000/areas
 
-* ...
+2. Create a Location:
+
+        $ curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' {"name":"Salzburg"}' $(docker-machine ip):3000/locations
+
+3. Fetch Location by ID:
+
+        $ curl -H "Accept: application/json" -H "Content-type: application/json" $(docker-machine ip):3000/locations/1
