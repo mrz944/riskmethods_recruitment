@@ -82,6 +82,7 @@ test:
 production:
   <<: *default
   host: db
+  url: <%= ENV.fetch('DATABASE_URL', '').sub(/^postgres/, "postgis") %>
   database: riskmethods_recruitment_production
   username: postgres
   password: 
