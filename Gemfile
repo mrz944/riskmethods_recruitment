@@ -28,6 +28,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'activerecord-postgis-adapter', '~> 6.0.0'
 gem 'rgeo-activerecord', '~> 6.2.0'
 gem 'rgeo-geojson', '~> 2.1.0'
+gem 'sidekiq', '~> 6.0.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
