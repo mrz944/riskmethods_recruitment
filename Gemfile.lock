@@ -194,6 +194,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   puma (~> 3.11)
   rails (~> 6.0.0)
+  redis (~> 4.0)
   rgeo-activerecord (~> 6.2.0)
   rgeo-geojson (~> 2.1.0)
   rspec-rails (~> 3.9.0)
