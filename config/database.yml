@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
+  host: db
   database: riskmethods_recruitment_production
-  username: riskmethods_recruitment
-  password: <%= ENV['RISKMETHODS_RECRUITMENT_DATABASE_PASSWORD'] %>
+  username: postgres
+  password: 

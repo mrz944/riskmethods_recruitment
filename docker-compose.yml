@@ -1,0 +1,32 @@
+version: '3'
+services:
+  db:
+    image: mdillon/postgis
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/riskmethods/data
+  web:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    environment:
+      - RAILS_ENV=production
+      - REDIS_URL=redis://redis:6379/12
+    volumes:
+      - .:/app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+  redis:
+    image: redis
+    volumes:
+      - ./tmp/db:/var/lib/redis/data
+  sidekiq:
+    build: .
+    command: 'bundle exec sidekiq'
+    volumes:
+      - .:/app
+    environment:
+      - RAILS_ENV=production
+      - REDIS_URL=redis://redis:6379/12
+    depends_on:
+      - redis
