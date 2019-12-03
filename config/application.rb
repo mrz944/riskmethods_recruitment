@@ -14,6 +14,7 @@ require "action_view/railtie"
 require "action_cable/engine"
 # require "sprockets/railtie"
 require "rails/test_unit/railtie"
+require "./lib/middleware/pg_check_connection"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -35,5 +36,7 @@ module RiskmethodsRecruitment
     config.api_only = true
 
     config.autoload_paths += %W( app/workers/ lib/ )
+
+    Rails.application.config.middleware.insert_before Rack::Head, PG::CheckConnection
   end
 end
